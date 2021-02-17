@@ -18,8 +18,8 @@ def save_data():
         file.write(json.dumps(item_set))
         file.write("\n")
         file.write(json.dumps(set_list))
-        # file.write("\n")
-        # file.write(json.dumps(target_stats))
+        file.write("\n")
+        file.write(json.dumps(list(target_stats)))
 
 
 def load_data():
@@ -30,7 +30,7 @@ def load_data():
         lines = file.readlines()
         item_set = json.loads(lines[0])
         set_list = json.loads(lines[1])
-        # target_stats = json.loads(lines[2])  
+        target_stats = json.loads(lines[2])[1:-1] 
 
 
 def add_item(slot_number):
@@ -69,7 +69,6 @@ def set_rating(set_id, *flags):
     rating = rating / len(target)
     return rating
 
-# JSON does not like loading target_stats
 def add_target(name):
     print(stats)
     stat_vals = [(int(input(f"{stat}: ")), int(input(f"{stat} rank (1-9, 1 is smallest): "))) for stat in stats]
@@ -80,6 +79,7 @@ def add_target(name):
 
 def main():
     load_data()
+    print(target_stats)
 
     # add_item(0)
     # set_stats(test_set, 0, 0, 0, 0, 0, 0)
